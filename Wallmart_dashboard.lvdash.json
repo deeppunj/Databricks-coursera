@@ -1,0 +1,262 @@
+{
+  "datasets": [
+    {
+      "name": "1c8d2e0d",
+      "displayName": "walmart_dataset",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.walmart_dataset",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "14b0fa53",
+      "displayName": "gold_monthly_sales",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.gold_monthly_sales",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "3a7e0e8f",
+      "displayName": "gold_sales_by_store",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.gold_sales_by_store",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "8ba44e75",
+      "displayName": "Dashbaord",
+      "layout": [
+        {
+          "widget": {
+            "name": "e16195a8",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "1c8d2e0d",
+                  "fields": [
+                    {
+                      "name": "Holiday_Flag",
+                      "expression": "`Holiday_Flag`"
+                    },
+                    {
+                      "name": "Weekly_Sales",
+                      "expression": "`Weekly_Sales`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "Holiday_Flag",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "Weekly_Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "40dee6c7",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "14b0fa53",
+                  "fields": [
+                    {
+                      "name": "Month",
+                      "expression": "`Month`"
+                    },
+                    {
+                      "name": "Monthly_Sales",
+                      "expression": "`Monthly_Sales`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showDescription": false,
+                "showTitle": false
+              },
+              "version": 1,
+              "widgetType": "forecast-line",
+              "encodings": {
+                "x": {
+                  "fieldName": "Month",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "original": {
+                    "fieldName": "Monthly_Sales"
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 11,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "b6fa1665",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3a7e0e8f",
+                  "fields": [
+                    {
+                      "name": "Store",
+                      "expression": "`Store`"
+                    },
+                    {
+                      "name": "Total_Sales",
+                      "expression": "`Total_Sales`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Sales Trend by Store",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "Store",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "Total_Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "Store",
+                  "legend": {
+                    "hideTitle": false,
+                    "hide": true
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 10,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
